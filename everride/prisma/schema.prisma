@@ -19,11 +19,39 @@ model User {
 model Car {
   id Int @id @default(autoincrement())
   category String
-  brand String
+  brandId Int
   model String
   year Int
   price Float
   fueltype String
 
+
+  brand Brand @relation(fields: [brandId], references: [id])
+
   @@map("car")
 }
+
+
+
+
+// næ
+ model Category {
+  id Int @id @default(autoincrement())
+  PassengerCar String
+  Van String
+  Truck String
+
+  @@map("category")
+}
+
+model Brand {
+  id Int @id @default(autoincrement())
+  name String
+  logoUrl String
+
+  cars Car[]
+
+  @@map("brand")
+}
+// kør en npm run prisma:reset for ændret String til Int og derefter npm run prisma:generate efter ændringer i schema
+

@@ -6,18 +6,21 @@ import { prisma } from '../prisma.js';
 export const getRecords = async (req: Request, res: Response) => {
   try {
     const data = await prisma.car.findMany({
-      select: {
+      include:{
+        brand: true
+      }
+      /* select: {
         id: true, // maybe?
         category: true,
-        brand: true,
+        brandId: true, // brand eller brandId skal bruge include
         model: true,
         year: true,
         price: true,
         fueltype: true
-      },
-      orderBy: {
-        price: 'asc'
-      }
+      }, */
+      /* orderBy: {
+        id: 'asc'
+      } */
     })
     res.json(data)
   } catch (error) {
@@ -37,6 +40,16 @@ export const getRecord = async (req: Request, res: Response) => {
     const data = await prisma.car.findUnique({
       where: {
         id
+      },
+      select: {
+        id: true,
+        model: true,
+        brand: {
+          select: {
+            name: true
+
+          }
+        }
       }
     });
     return res.status(200).json(data);
@@ -48,9 +61,9 @@ export const getRecord = async (req: Request, res: Response) => {
 
 
 export const createRecord = async (req: Request, res: Response) => {
-  const { category, brand, model, year, price, fueltype } = req.body;
+  const { category, brandId, model, year, price, fueltype } = req.body;
 
-  if (!category || !brand || !model || !year || !price || !fueltype) {
+  if (!category || !brandId || !model || !year || !price || !fueltype) {
     return res.status(400).json({ error: 'Alle felter skal udfyldes' });
   }
 
@@ -58,10 +71,10 @@ export const createRecord = async (req: Request, res: Response) => {
     const data = await prisma.car.create({
       data: {
         category,
-        brand,
+        brandId: Number(brandId), // brandId: Number(brandId) // relation i stedet for brand
         model,
         year: Number(year),
-        price,
+        price: Number(price),
         fueltype
       }
     });

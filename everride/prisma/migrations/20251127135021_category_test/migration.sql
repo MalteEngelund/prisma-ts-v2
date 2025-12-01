@@ -1,0 +1,23 @@
+-- CreateTable
+CREATE TABLE `category` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `PassengerCar` VARCHAR(191) NOT NULL,
+    `Van` VARCHAR(191) NOT NULL,
+    `Truck` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `brand` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `Volvo` VARCHAR(191) NOT NULL,
+    `BMW` VARCHAR(191) NOT NULL,
+    `Skoda` VARCHAR(191) NOT NULL,
+    `Renault` VARCHAR(191) NOT NULL,
+    `Opel` VARCHAR(191) NOT NULL,
+    `Kia` VARCHAR(191) NOT NULL,
+    `Toyota` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
