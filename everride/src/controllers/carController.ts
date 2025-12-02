@@ -67,7 +67,7 @@ export const createRecord = async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Alle felter skal udfyldes' });
   }
 
-  try {
+  try { // jeg får en fejl her når jeg prøver at oprette en bil med en brandId der ikke kan findes
     const data = await prisma.car.create({
       data: {
         category,

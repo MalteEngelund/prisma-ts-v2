@@ -7,11 +7,20 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
   id Int @id @default(autoincrement())
-  name String
+  firstname String
+  lastname String
   email String @unique
   password String
+  role Role
+
+  isActive Boolean
 
   @@map("user")
 }
@@ -49,9 +58,10 @@ model Brand {
   name String
   logoUrl String
 
-  cars Car[]
+  car Car[]
 
   @@map("brand")
 }
+// brand skal fixes, da alle ting i controller/db ikke er opdateret med brandId. se 25/11
 // kør en npm run prisma:reset for ændret String til Int og derefter npm run prisma:generate efter ændringer i schema
 
