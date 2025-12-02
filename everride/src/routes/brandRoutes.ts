@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCarsByBrand } from "../controllers/brandController.js";
+import { createRecord, getCarsByBrand, getRecord, getRecords } from "../controllers/brandController.js";
 
 const router = Router();
 
@@ -8,9 +8,9 @@ const router = Router();
 router.get('/carsbybrand', getCarsByBrand);
 
 
-// router.get('/', getRecords);
-// router.get('/:id', getRecord)
-// router.post('/', createRecord);
+router.get('/', getRecords);
+router.get('/:id', getRecord)
+router.post('/', createRecord);
 // router.put('/:id', updateRecord);
 // router.delete('/:id', deleteRecord);
 
