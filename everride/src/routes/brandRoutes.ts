@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { createRecord, getCarsByBrand, getRecord, getRecords } from "../controllers/brandController.js";
+import { createRecord, getRecord, getRecords } from "../controllers/brandController.js";
 
 const router = Router();
 
 
 //test
-router.get('/carsbybrand', getCarsByBrand);
+// router.get('/carsbybrand', getCarsByBrand);
 
 
 router.get('/', getRecords);

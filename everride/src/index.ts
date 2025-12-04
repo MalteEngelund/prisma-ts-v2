@@ -6,6 +6,7 @@ import { categoryRoutes } from './routes/categoryRoutes.js';
 import { brandRoutes } from './routes/brandRoutes.js';
 import { loginRoutes } from './routes/loginRoutes.js';
 import { authRoutes } from './routes/authRoutes.js';
+import { fueltypeRoutes } from './routes/fueltypeRoutes.js';
 
 // Indlæs miljøvariabler fra .env (uden at vise logs)
 dotenv.config({ quiet: true });
@@ -28,6 +29,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/cars', carRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/brands', brandRoutes)
+app.use('/api/fueltypes', fueltypeRoutes)
 app.use('/api/login', loginRoutes)
 app.use('/api/auth', authRoutes)
 

@@ -27,15 +27,16 @@ model User {
 
 model Car {
   id Int @id @default(autoincrement())
-  category String
+  categoryId Int
   brandId Int
   model String
   year Int
   price Float
-  fueltype String
+  fueltypeId Int
 
-
+  category Category @relation(fields: [categoryId], references: [id])
   brand Brand @relation(fields: [brandId], references: [id])
+  fueltype Fueltype @relation(fields: [fueltypeId], references: [id])
 
   @@map("car")
 }
@@ -46,9 +47,9 @@ model Car {
 // næ
  model Category {
   id Int @id @default(autoincrement())
-  PassengerCar String
-  Van String
-  Truck String
+  name String
+
+  car Car[]
 
   @@map("category")
 }
@@ -65,3 +66,11 @@ model Brand {
 // brand skal fixes, da alle ting i controller/db ikke er opdateret med brandId. se 25/11
 // kør en npm run prisma:reset for ændret String til Int og derefter npm run prisma:generate efter ændringer i schema
 
+model Fueltype {
+  id Int @id @default(autoincrement())
+  name String
+
+  car Car[]
+
+  @@map("fueltype")
+}

@@ -1,13 +1,13 @@
-import { Request, Response } from 'express';
-import { prisma } from '../prisma.js';
+import { Request, Response } from "express";
+import { prisma } from "../prisma.js";
 
 export const getRecords = async (req: Request, res: Response) => {
   try {
-    const data = await prisma.brand.findMany();
+    const data = await prisma.fueltype.findMany();
     res.json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch brand' });
+    res.status(500).json({ error: 'Failed to fetch fueltype' });
   }
 };
 
@@ -19,7 +19,7 @@ export const getRecord = async (req: Request, res: Response) => {
   }
 
   try {
-    const data = await prisma.brand.findUnique({
+    const data = await prisma.fueltype.findUnique({
       where: {
         id
       },
@@ -27,24 +27,23 @@ export const getRecord = async (req: Request, res: Response) => {
     return res.status(200).json(data);
   } catch (error) {
     console.error(error); // Failed request log
-    res.status(500).json({ error: 'Failed to fetch brand' });
+    res.status(500).json({ error: 'Failed to fetch fueltype' });
   }
 };
 
 
 
 export const createRecord = async (req: Request, res: Response) => {
-  const { name, logoUrl} = req.body;
+  const { name} = req.body;
 
-  if (!name || !logoUrl) {
+  if (!name) {
     return res.status(400).json({ error: 'Alle felter skal udfyldes' });
   }
 
   try {
-    const data = await prisma.brand.create({
+    const data = await prisma.fueltype.create({
       data: {
-        name,
-        logoUrl
+        name
       }
     });
 
@@ -59,22 +58,21 @@ export const createRecord = async (req: Request, res: Response) => {
 
 export const updateRecord = async (req: Request, res: Response) => {
   const id = Number(req.params.id) // Sikrer at id er et tal
-  const { name, logoUrl} = req.body // Deconstruerer form body objektet
+  const { name } = req.body // Deconstruerer form body objektet
 
   if(!id) {
     return res.status(400).json({ error: 'Id skal have en gyldig værdi' });
   }
 
-  if(!name || !logoUrl) {
+  if(!name) {
     return res.status(400).json({ error: 'Alle felter skal udfyldes' });
   }
 
   try {
-    const data = await prisma.brand.update({
+    const data = await prisma.fueltype.update({
       where: { id },
       data: {
-        name,
-        logoUrl
+        name
       }
     })
 
@@ -90,50 +88,13 @@ export const deleteRecord = async (req: Request, res: Response) => {
   const id = Number(req.params.id)
 
   try {
-    await prisma.brand.delete({
+    await prisma.fueltype.delete({
       where: { id },
     });
 
-    res.status(200).json({ message: `Brand nr. ${id} er slettet` });
+    res.status(200).json({ message: `fueltype nr. ${id} er slettet` });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Kunne ikke slette brand' });
+    res.status(500).json({ error: 'Kunne ikke slette fueltype' });
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-// denne sorterer biler efter brand, fra de eksisterende biler
-/* export const getCarsByBrand = async (req: Request, res: Response) => {
-  try {
-    // Fetch all cars from DB
-    const cars = await prisma.car.findMany();
-
-    // Group cars by brand
-    const grouped = cars.reduce((acc, car) => {
-      if (!acc[car.brand]) {
-        acc[car.brand] = [];
-      }
-      acc[car.brand].push(car);
-      return acc;
-    }, {});
-
-    res.json(grouped);
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
-  }
-}; */
-
-
-

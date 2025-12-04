@@ -7,9 +7,11 @@ export const getRecords = async (req: Request, res: Response) => {
   try {
     const data = await prisma.car.findMany({
       include:{
-        brand: true
+        brand: true,
+        category: true
       }
-      /* select: {
+      /* jeg har udkommenteret select, da jeg nu bruger include (brandId relation)
+      select: {
         id: true, // maybe?
         category: true,
         brandId: true, // brand eller brandId skal bruge include
@@ -47,9 +49,8 @@ export const getRecord = async (req: Request, res: Response) => {
         brand: {
           select: {
             name: true
-
           }
-        }
+        },
       }
     });
     return res.status(200).json(data);
@@ -61,21 +62,21 @@ export const getRecord = async (req: Request, res: Response) => {
 
 
 export const createRecord = async (req: Request, res: Response) => {
-  const { category, brandId, model, year, price, fueltype } = req.body;
+  const { categoryId, brandId, model, year, price, fueltypeId } = req.body;
 
-  if (!category || !brandId || !model || !year || !price || !fueltype) {
+  if (!categoryId || !brandId || !model || !year || !price || !fueltypeId) {
     return res.status(400).json({ error: 'Alle felter skal udfyldes' });
   }
 
-  try { // jeg får en fejl her når jeg prøver at oprette en bil med en brandId der ikke kan findes
+  try {
     const data = await prisma.car.create({
       data: {
-        category,
+        categoryId: Number(categoryId),
         brandId: Number(brandId), // brandId: Number(brandId) // relation i stedet for brand
         model,
         year: Number(year),
         price: Number(price),
-        fueltype
+        fueltypeId: Number(fueltypeId)
       }
     });
 
@@ -88,13 +89,13 @@ export const createRecord = async (req: Request, res: Response) => {
 
 export const updateRecord = async (req: Request, res: Response) => {
   const id = Number(req.params.id) // Sikrer at id er et tal
-  const { category, brand, model, year, price, fueltype } = req.body // Deconstruerer form body objektet
+  const { categoryId, brandId, model, year, price, fueltypeId } = req.body // Deconstruerer form body objektet
 
   if(!id) {
     return res.status(400).json({ error: 'Id skal have en gyldig værdi' });
   }
 
-  if(!category || !brand || !model || !year || !price || !fueltype) {
+  if(!categoryId || !brandId || !model || !year || !price || !fueltypeId) {
     return res.status(400).json({ error: 'Alle felter skal udfyldes' });
   }
 
@@ -102,12 +103,12 @@ export const updateRecord = async (req: Request, res: Response) => {
     const data = await prisma.car.update({
       where: { id },
       data: {
-        category,
-        brand,
+        categoryId: Number(categoryId),
+        brandId: Number(brandId), // brandId: Number(brandId) // relation i stedet for brand
         model,
         year: Number(year),
-        price,
-        fueltype
+        price: Number(price),
+        fueltypeId: Number(fueltypeId)
       }
     })
 
