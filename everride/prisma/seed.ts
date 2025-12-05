@@ -55,8 +55,8 @@ const categories = await prisma.category.createMany({
   data: [
     { name: "Truck" }, 
     { name: "Van" },
-    { name: "Sedan" }, 
-    { name: "Station car" }, 
+    { name: "Sedan" },
+    { name: "Station car" },
     { name: "Spand" }
    ]
 });
@@ -76,6 +76,7 @@ const fueltypes = await prisma.fueltype.createMany({
 // Udskriver i terminalen at drivmidler er oprettet
 console.log("Seed completed for fueltypes:", fueltypes);
 
+
 }
 
 
@@ -88,3 +89,27 @@ main()
     prisma.$disconnect();
     process.exit(1);
   });
+
+
+
+
+
+  
+/* const randomBetween = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+
+// Opretter mange drivmidler i databasen
+const cars = await prisma.car.createMany({
+  data: [
+    { categoryId: randomBetween(1, 5),
+      brandId: randomBetween(1, 5),
+      model: "FH16",
+      year: 2020,
+      price: 150000,
+      fueltypeId: randomBetween(1, 5)
+     } 
+   ]
+});
+// Udskriver i terminalen at cars er oprettet
+console.log("Seed completed for cars:", cars); */

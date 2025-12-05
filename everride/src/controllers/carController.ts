@@ -8,7 +8,8 @@ export const getRecords = async (req: Request, res: Response) => {
     const data = await prisma.car.findMany({
       include:{
         brand: true,
-        category: true
+        category: true,
+        fueltype: true,
       }
       /* jeg har udkommenteret select, da jeg nu bruger include (brandId relation)
       select: {
@@ -45,8 +46,18 @@ export const getRecord = async (req: Request, res: Response) => {
       },
       select: {
         id: true,
-        model: true,
         brand: {
+          select: {
+            name: true
+          }
+        },
+        model: true,
+        category: {
+          select: {
+            name: true
+          }
+        },
+        fueltype: {
           select: {
             name: true
           }

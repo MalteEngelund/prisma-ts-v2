@@ -1,0 +1,21 @@
+id,firstname,lastname,email,password,role,isActive
+1,Admin,Adminsen,info@wu.dk ,password,"ADMIN",true
+2,John,Doe,test@example.com ,password,"USER",true
+3,Jane,Smith,jane.smith@example.com,password,"USER",true
+4,Mark,Anderson,mark.anderson@example.com,password,"USER",false
+5,Sarah,Johnson,sarah.johnson@example.com,password,"USER",true
+6,Peter,Larsen,peter.larsen@example.com,password,"USER",true
+7,Emily,Brown,emily.brown@example.com,password,"USER",false
+8,Lucas,Miller,lucas.miller@example.com,password,"USER",true
+9,Karen,Wilson,karen.wilson@example.com,password,"ADMIN",true
+10,Alice,Anderson,alice.anderson@example.com,password,"USER",true
+11,Bob,Bentsen,bob.bentsen@example.com,password,"USER",true
+12,Carla,Christensen,carla.christensen@example.com,password,"USER",true
+13,David,Damgaard,david.damgaard@example.com,password,"USER",true
+14,Emma,Eriksen,emma.eriksen@example.com,password,"USER",true
+15,Frederik,Falk,frederik.falk@example.com,password,"USER",true
+16,Gina,Graversen,gina.graversen@example.com,password,"USER",true
+17,Henry,Holt,henry.holt@example.com,password,"USER",true
+18,Ida,Iversen,ida.iversen@example.com,password,"USER",true
+19,Jonas,Johannsen,jonas.johannsen@example.com,password,"USER",true
+
